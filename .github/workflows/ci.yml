@@ -4,7 +4,7 @@ name: CI
 on: [push, pull_request, workflow_dispatch]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
@@ -16,3 +16,4 @@ jobs:
           go-version: ${{ matrix.go }}
       - run: go mod download
       - run: go build -v ./...
+      - run: go test -v ./...
