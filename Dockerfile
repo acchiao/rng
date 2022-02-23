@@ -2,16 +2,16 @@
 FROM golang:1.17.7-bullseye AS build
 
 ENV RNG_HOME=/opt/rng \
-      GIN_MODE=release
+      GIN_MODE=release \
+      CGO_ENABLED=0
 
 WORKDIR ${RNG_HOME}
 
 COPY go.mod go.sum ${RNG_HOME}/
-COPY go.sum ${RNG_HOME}/
 RUN go mod download
 
-COPY main.go ${RNG_HOME}/
-RUN go build -tags netgo -ldflags '-s -w' -o rng
+COPY rng.go ${RNG_HOME}/
+RUN go build -tags "netgo nomsgpack" -ldflags "-s -w" -o rng
 
 FROM gcr.io/distroless/base-debian11
 
