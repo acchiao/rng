@@ -1,7 +1,8 @@
 # syntax=docker/dockerfile:1
 FROM golang:1.17.7-bullseye AS build
 
-ENV RNG_HOME=/opt/rng
+ENV RNG_HOME=/opt/rng \
+      GIN_MODE=release
 
 WORKDIR ${RNG_HOME}
 
