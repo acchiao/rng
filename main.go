@@ -1,12 +1,13 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
 	"net/http"
 	"time"
+
+	"github.com/gin-gonic/gin"
 )
 
-func main() {
+func setupRouter() *gin.Engine {
 	router := gin.Default()
 
 	v0 := router.Group("/")
@@ -16,14 +17,7 @@ func main() {
 		v0.GET("/ping", getPong)
 	}
 
-	s := &http.Server{
-		Addr:         ":3000",
-		Handler:      router,
-		ReadTimeout:  10 * time.Second,
-		WriteTimeout: 10 * time.Second,
-	}
-
-	s.ListenAndServe()
+	return router
 }
 
 func getRNG(c *gin.Context) {
@@ -32,4 +26,17 @@ func getRNG(c *gin.Context) {
 
 func getPong(c *gin.Context) {
 	c.String(http.StatusOK, "pong")
+}
+
+func main() {
+	router := setupRouter()
+
+	s := &http.Server{
+		Addr:         ":3000",
+		Handler:      router,
+		ReadTimeout:  10 * time.Second,
+		WriteTimeout: 10 * time.Second,
+	}
+
+	s.ListenAndServe()
 }
