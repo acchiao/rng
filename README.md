@@ -9,3 +9,13 @@
 - [Go] ^1.17
 
 [go]: https://go.dev/
+
+## Quickstart
+
+```
+go build ./...
+go test ./...
+go mod tidy
+
+docker build --file Dockerfile --tag rng --load .
+```
