@@ -1,7 +1,11 @@
 package main
 
 import (
+	"context"
+	"log"
 	"net/http"
+	"os/signal"
+	"syscall"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -13,7 +17,6 @@ func setupRouter() *gin.Engine {
 	v0 := router.Group("/")
 	{
 		v0.GET("/", getRNG)
-		v0.GET("/rng", getRNG)
 		v0.GET("/ping", getPong)
 	}
 
@@ -29,14 +32,34 @@ func getPong(c *gin.Context) {
 }
 
 func main() {
+	ctx, stop := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
+	defer stop()
+
 	router := setupRouter()
 
-	s := &http.Server{
-		Addr:         ":3000",
+	srv := &http.Server{
+		Addr:         "127.0.1:3000",
 		Handler:      router,
 		ReadTimeout:  10 * time.Second,
 		WriteTimeout: 10 * time.Second,
 	}
 
-	s.ListenAndServe()
+	go func() {
+		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			log.Fatalf("listen: %s\n", err)
+		}
+	}()
+
+	<-ctx.Done()
+
+	stop()
+	log.Println("Graceful shutdown initiated")
+
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	if err := srv.Shutdown(ctx); err != nil {
+		log.Fatal("Force shutdown initiated: ", err)
+	}
+
+	log.Println("Server exiting")
 }

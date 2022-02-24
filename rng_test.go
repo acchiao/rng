@@ -25,7 +25,7 @@ func TestRNGRoute(t *testing.T) {
 	expected := `{"random":4}`
 
 	w := httptest.NewRecorder()
-	req, _ := http.NewRequest("GET", "/rng", nil)
+	req, _ := http.NewRequest("GET", "/", nil)
 	router.ServeHTTP(w, req)
 
 	resp := w.Result()
