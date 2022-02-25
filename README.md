@@ -12,7 +12,7 @@
 
 ## Quickstart
 
-```
+```sh
 go build ./...
 go test ./...
 go mod tidy
