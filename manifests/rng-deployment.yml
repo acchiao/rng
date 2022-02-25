@@ -28,13 +28,13 @@ spec:
         - name: rng-port
           containerPort: 3000
           protocol: TCP
-        - name: readiness-port
+        - name: healthz-port
           containerPort: 3000
           hostPort: 3000
         readinessProbe:
           httpGet:
-            path: /ping
-            port: readiness-port
+            path: /healthz
+            port: healthz-port
           initialDelaySeconds: 5
           periodSeconds: 5s
           failureThreshold: 2
