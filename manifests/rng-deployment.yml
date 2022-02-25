@@ -6,27 +6,38 @@ metadata:
     app: rng
   name: rng
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: rng
   strategy:
+    type: RollingUpdate
     rollingUpdate:
       maxSurge: 25%
       maxUnavailable: 25%
-    type: RollingUpdate
   template:
     metadata:
       labels:
         app: rng
     spec:
       containers:
-      - image: raccoon/rng:latest
+      - image: ghcr.io/acchiao/rng:latest
         imagePullPolicy: Always
         name: rng
         ports:
-        - containerPort: 3000
+        - name: rng-port
+          containerPort: 3000
           protocol: TCP
+        - name: readiness-port
+          containerPort: 3000
+          hostPort: 3000
+        readinessProbe:
+          httpGet:
+            path: /ping
+            port: readiness-port
+          initialDelaySeconds: 5
+          periodSeconds: 5s
+          failureThreshold: 2
         resources:
           requests:
             cpu: 50m
