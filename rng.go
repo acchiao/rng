@@ -18,6 +18,8 @@ func setupRouter() *gin.Engine {
 	{
 		v0.GET("/", getRNG)
 		v0.GET("/ping", getPong)
+		v0.GET("/bing", getBong)
+		v0.GET("/healthz", getHealthz)
 	}
 
 	return router
@@ -29,6 +31,14 @@ func getRNG(c *gin.Context) {
 
 func getPong(c *gin.Context) {
 	c.String(http.StatusOK, "pong")
+}
+
+func getBong(c *gin.Context) {
+	c.String(http.StatusOK, "bong")
+}
+
+func getHealthz(c *gin.Context) {
+	c.Status(http.StatusOK)
 }
 
 func main() {
