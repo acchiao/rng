@@ -28,11 +28,20 @@ func setupRouter() *gin.Engine {
 		v0.GET("/healthz", getHealthz)
 	}
 
+	v2 := router.Group("/v2")
+	{
+		v2.GET("/", getRNGv2)
+	}
+
 	return router
 }
 
 func getRNG(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"random": 4})
+}
+
+func getRNGv2(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{"random": 5})
 }
 
 func getPong(c *gin.Context) {

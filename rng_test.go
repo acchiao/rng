@@ -55,3 +55,28 @@ func TestRNGRoute(t *testing.T) {
 	assert.Equal(t, http.StatusOK, w.Code)
 	assert.Equal(t, expected, string(body))
 }
+
+func TestRNGv2Route(t *testing.T) {
+	router := setupRouter()
+	expected := `{"random":5}`
+
+	w := httptest.NewRecorder()
+	req, _ := http.NewRequest("GET", "/v2/", nil)
+	router.ServeHTTP(w, req)
+
+	resp := w.Result()
+	body, _ := io.ReadAll(resp.Body)
+
+	assert.Equal(t, http.StatusOK, w.Code)
+	assert.Equal(t, expected, string(body))
+}
+
+func TestRedirectTrailingSlash(t *testing.T) {
+	router := setupRouter()
+
+	w := httptest.NewRecorder()
+	req, _ := http.NewRequest("GET", "/v2", nil)
+	router.ServeHTTP(w, req)
+
+	assert.Equal(t, http.StatusMovedPermanently, w.Code)
+}
