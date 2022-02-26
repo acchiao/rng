@@ -6,7 +6,7 @@ metadata:
     app: rng
   name: rng
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: rng
@@ -21,20 +21,20 @@ spec:
         app: rng
     spec:
       containers:
-      - image: ghcr.io/acchiao/rng:latest
+      - name: rng
+        image: ghcr.io/acchiao/rng:latest
         imagePullPolicy: Always
-        name: rng
+        env:
+          - name: GIN_MODE
+            value: release
         ports:
         - name: rng-port
           containerPort: 3000
           protocol: TCP
-        - name: healthz-port
-          containerPort: 3000
-          hostPort: 3000
         readinessProbe:
           httpGet:
             path: /healthz
-            port: healthz-port
+            port: rng-port
           initialDelaySeconds: 5
           periodSeconds: 5
           failureThreshold: 2
