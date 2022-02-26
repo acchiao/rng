@@ -8,11 +8,14 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
 func setupRouter() *gin.Engine {
 	router := gin.Default()
+
+	router.Use(cors.Default())
 
 	v0 := router.Group("/")
 	{
