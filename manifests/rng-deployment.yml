@@ -21,32 +21,32 @@ spec:
         app: rng
     spec:
       containers:
-      - name: rng
-        image: ghcr.io/acchiao/rng:latest
-        imagePullPolicy: Always
-        env:
-          - name: GIN_MODE
-            value: release
-        ports:
-        - name: rng-port
-          containerPort: 3000
-          protocol: TCP
-        readinessProbe:
-          httpGet:
-            path: /healthz
-            port: rng-port
-          initialDelaySeconds: 5
-          periodSeconds: 5
-          failureThreshold: 2
-        resources:
-          requests:
-            cpu: 50m
-            memory: 50Mi
-          limits:
-            cpu: 100m
-            memory: 100Mi
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: FallbackToLogsOnError
+        - name: rng
+          image: ghcr.io/acchiao/rng:latest
+          imagePullPolicy: Always
+          env:
+            - name: GIN_MODE
+              value: release
+          ports:
+            - name: rng-port
+              containerPort: 3000
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: rng-port
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 2
+          resources:
+            requests:
+              cpu: 50m
+              memory: 50Mi
+            limits:
+              cpu: 100m
+              memory: 100Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: FallbackToLogsOnError
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
