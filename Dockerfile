@@ -2,10 +2,10 @@
 FROM golang:1.17.7-bullseye AS build
 
 ENV RNG_HOME=/opt/rng \
+      CGO_ENABLED=0 \
       GIN_MODE=release \
-      GOOS=linux \
       GOARCH=amd64 \
-      CGO_ENABLED=0
+      GOOS=linux
 
 WORKDIR ${RNG_HOME}
 
