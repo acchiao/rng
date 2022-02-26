@@ -12,7 +12,13 @@ import (
 )
 
 func setupRouter() *gin.Engine {
-	router := gin.Default()
+	router := gin.New()
+
+	router.Use(gin.LoggerWithConfig(gin.LoggerConfig{
+		SkipPaths: []string{"/healthz"},
+	}))
+
+	router.Use(gin.Recovery())
 
 	v0 := router.Group("/")
 	{
