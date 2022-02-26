@@ -1,11 +1,18 @@
 ---
 name: CI
 
-on: [push, pull_request, workflow_dispatch]
+on:
+  push:
+    branches: [ main ]
+    tags: "v*"
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
 
 env:
   PROJECT_NAME: rng
   REGISTRY_URL: registry.hub.docker.com
+  GIN_MODE: release
 
 jobs:
   test:
@@ -56,8 +63,8 @@ jobs:
         id: meta
         with:
           images: |
-            ${{ env.REGISTRY_URL }}/${{ secrets.REGISTRY_NAME }}/${{ env.PROJECT_NAME }}
             ghcr.io/${{ github.actor }}/${{ env.PROJECT_NAME }}
+            ${{ env.REGISTRY_URL }}/${{ secrets.REGISTRY_NAME }}/${{ env.PROJECT_NAME }}
           flavor: |
             latest=true
             prefix=
@@ -66,7 +73,7 @@ jobs:
             type=ref,event=branch
             type=ref,event=pr
             type=ref,event=tag
-            type=semver,pattern=v{{version}}
+            type=semver,pattern={{version}}
             type=semver,pattern={{raw}}
             type=semver,pattern=v{{major}}
             type=semver,pattern=v{{major}}.{{minor}}

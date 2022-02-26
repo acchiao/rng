@@ -1,6 +1,7 @@
 # rng
 
 [![CI](https://github.com/acchiao/rng/actions/workflows/ci.yml/badge.svg)](https://github.com/acchiao/rng/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/acchiao/rng/actions/workflows/codeql.yml/badge.svg)](https://github.com/acchiao/rng/actions/workflows/codeql.yml)
 
 ![return 4](https://www.explainxkcd.com/wiki/images/f/fe/random_number.png)
 
@@ -12,7 +13,7 @@
 
 ## Quickstart
 
-```sh
+```shell
 go build ./...
 go test ./...
 go mod tidy
