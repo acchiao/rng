@@ -1,7 +1,6 @@
 # limelight
 
 [![CI](https://github.com/acchiao/limelight/actions/workflows/ci.yml/badge.svg)](https://github.com/acchiao/limelight/actions/workflows/ci.yml)
-[![CodeQL](https://github.com/acchiao/limelight/actions/workflows/codeql.yml/badge.svg)](https://github.com/acchiao/limelight/actions/workflows/codeql.yml)
 
 ## Prerequisites
 
