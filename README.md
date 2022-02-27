@@ -1,7 +1,7 @@
-# rng
+# limelight
 
-[![CI](https://github.com/acchiao/rng/actions/workflows/ci.yml/badge.svg)](https://github.com/acchiao/rng/actions/workflows/ci.yml)
-[![CodeQL](https://github.com/acchiao/rng/actions/workflows/codeql.yml/badge.svg)](https://github.com/acchiao/rng/actions/workflows/codeql.yml)
+[![CI](https://github.com/acchiao/limelight/actions/workflows/ci.yml/badge.svg)](https://github.com/acchiao/limelight/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/acchiao/limelight/actions/workflows/codeql.yml/badge.svg)](https://github.com/acchiao/limelight/actions/workflows/codeql.yml)
 
 ## Prerequisites
 
@@ -16,7 +16,7 @@ go build ./...
 go test ./...
 go mod tidy
 
-docker build --file Dockerfile --tag rng --load .
+docker build --file Dockerfile --tag limelight --load .
 ```
 
 ## API Reference

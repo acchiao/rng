@@ -1,4 +1,4 @@
-module github.com/acchiao/rng
+module github.com/acchiao/limelight
 
 go 1.17
 
