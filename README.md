@@ -1,6 +1,7 @@
 # limelight
 
 [![CI](https://github.com/acchiao/limelight/actions/workflows/ci.yml/badge.svg)](https://github.com/acchiao/limelight/actions/workflows/ci.yml)
+[![Release](https://github.com/acchiao/limelight/actions/workflows/release.yml/badge.svg)](https://github.com/acchiao/limelight/actions/workflows/release.yml)
 
 ## Prerequisites
 
