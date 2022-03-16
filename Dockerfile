@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM golang:1.17.8-bullseye AS build
+FROM golang:1.18.0-bullseye AS build
 
 ENV LIMELIGHT_HOME=/opt/limelight \
       CGO_ENABLED=0 \
