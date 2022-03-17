@@ -49,6 +49,14 @@ jobs:
       - uses: github/codeql-action/autobuild@v1
       - uses: github/codeql-action/analyze@v1
 
+  lint:
+    name: Lint
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v2
+      - uses: golangci/golangci-lint-action@v2
+
   build:
     name: Build
     runs-on: ubuntu-20.04
