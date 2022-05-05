@@ -86,7 +86,7 @@ jobs:
             type=ref,event=branch
             type=sha,prefix=,suffix=,format=long
             type=sha,prefix=,suffix=,format=short
-      - uses: docker/build-push-action@v2
+      - uses: docker/build-push-action@v3
         id: build
         with:
           file: Dockerfile
