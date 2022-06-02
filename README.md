@@ -5,7 +5,7 @@
 
 ## Prerequisites
 
-- [Go] ^1.17
+- [Go] ^1.18
 
 [go]: https://go.dev/
 
