@@ -1,7 +1,7 @@
-# limelight
+# rng
 
-[![CI](https://github.com/acchiao/limelight/actions/workflows/ci.yml/badge.svg)](https://github.com/acchiao/limelight/actions/workflows/ci.yml)
-[![Release](https://github.com/acchiao/limelight/actions/workflows/release.yml/badge.svg)](https://github.com/acchiao/limelight/actions/workflows/release.yml)
+[![CI](https://github.com/acchiao/rng/actions/workflows/ci.yml/badge.svg)](https://github.com/acchiao/rng/actions/workflows/ci.yml)
+[![Release](https://github.com/acchiao/rng/actions/workflows/release.yml/badge.svg)](https://github.com/acchiao/rng/actions/workflows/release.yml)
 
 ## Prerequisites
 
@@ -17,7 +17,7 @@ go build ./...
 go test ./...
 go mod tidy
 
-docker build --file Dockerfile --tag limelight --load .
+docker buildx build --file Dockerfile --tag rng --load .
 ```
 
 ## API Reference

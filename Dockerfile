@@ -1,23 +1,23 @@
 # syntax=docker/dockerfile:1
 FROM golang:1.18.3-bullseye AS build
 
-ENV LIMELIGHT_HOME=/opt/limelight \
+ENV RNG_HOME=/opt/rng \
       CGO_ENABLED=0 \
       GIN_MODE=release \
       GOARCH=amd64 \
       GOOS=linux
 
-WORKDIR ${LIMELIGHT_HOME}
+WORKDIR ${RNG_HOME}
 
-COPY go.mod go.sum ${LIMELIGHT_HOME}/
+COPY go.mod go.sum ${RNG_HOME}/
 RUN go mod download
 
-COPY limelight.go ${LIMELIGHT_HOME}/
-RUN go build -tags "netgo nomsgpack" -ldflags "-s -w" -o limelight
+COPY rng.go ${RNG_HOME}/
+RUN go build -tags "netgo nomsgpack" -ldflags "-s -w" -o rng
 
-FROM gcr.io/distroless/base-debian11 AS limelight
+FROM gcr.io/distroless/base-debian11 AS rng
 
-COPY --from=build /opt/limelight/limelight /limelight
+COPY --from=build /opt/rng/rng /rng
 
 EXPOSE 3000
-ENTRYPOINT ["/limelight"]
+ENTRYPOINT ["/rng"]
