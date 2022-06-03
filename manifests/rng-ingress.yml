@@ -1,0 +1,40 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: rng-ingress
+  namespace: rng
+  labels:
+    app.kubernetes.io/name: rng
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-production
+    external-dns.alpha.kubernetes.io/hostname: rng.acchiao.com
+    external-dns.alpha.kubernetes.io/ttl: "60"
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - acchiao.com
+    - rng.acchiao.com
+    secretName: rng-tls
+  rules:
+    - host: acchiao.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: rng
+                port:
+                  number: 80
+    - host: rng.acchiao.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: rng
+                port:
+                  number: 80
