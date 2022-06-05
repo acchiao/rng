@@ -15,9 +15,14 @@
 go get ./...
 go build ./...
 go test ./...
+go fmt ./...
 go mod tidy
 
 docker buildx build --file Dockerfile --tag rng --load .
+docker run --name rng --detach --publish 3000:3000 rng
+curl http://127.0.0.1:3000
+docker stop rng
+docker rm rng
 ```
 
 ## API Reference

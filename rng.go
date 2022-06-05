@@ -13,9 +13,13 @@ import (
 )
 
 func setupRouter() *gin.Engine {
-	router := gin.Default()
+	router := gin.New()
 
-	router.Use(cors.Default())
+	router.Use(
+		cors.Default(),
+		gin.LoggerWithConfig(gin.LoggerConfig{SkipPaths: []string{"/healthz"}}),
+		gin.Recovery(),
+	)
 
 	v0 := router.Group("/")
 	{

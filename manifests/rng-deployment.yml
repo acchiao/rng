@@ -21,6 +21,8 @@ spec:
       labels:
         app: rng
     spec:
+      imagePullSecrets:
+        - name: dockerhub
       containers:
         - name: rng
           image: ghcr.io/acchiao/rng:latest
