@@ -65,7 +65,7 @@ func getHealthz(c *gin.Context) {
 }
 
 func main() {
-	tracer.Start()
+	tracer.Start(tracer.WithRuntimeMetrics())
 	defer tracer.Stop()
 
 	err := profiler.Start(
