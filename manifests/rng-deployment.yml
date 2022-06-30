@@ -10,7 +10,7 @@ metadata:
     tags.datadoghq.com/service: "rng"
     tags.datadoghq.com/version: "0.1.0"
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: rng
@@ -28,7 +28,7 @@ spec:
         tags.datadoghq.com/version: "0.1.0"
     spec:
       imagePullSecrets:
-        - name: dockerhub
+        - name: regcred
       containers:
         - name: rng
           image: docker.io/acchiao/rng:latest
@@ -67,7 +67,7 @@ spec:
               cpu: 5m
               memory: 10Mi
             limits:
-              cpu: 15m
+              cpu: 100m
               memory: 100Mi
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: FallbackToLogsOnError
