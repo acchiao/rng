@@ -13,10 +13,10 @@ metadata:
 spec:
   ingressClassName: nginx
   tls:
-  - hosts:
-    - acchiao.com
-    - rng.acchiao.com
-    secretName: rng-tls
+    - hosts:
+        - acchiao.com
+        - rng.acchiao.com
+      secretName: rng-tls
   rules:
     - host: acchiao.com
       http:
