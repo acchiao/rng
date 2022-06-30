@@ -12,7 +12,7 @@ WORKDIR ${RNG_HOME}
 COPY go.mod go.sum ${RNG_HOME}/
 RUN go mod download
 
-COPY rng.go ${RNG_HOME}/
+COPY main.go ${RNG_HOME}/
 RUN go build -trimpath -tags "netgo nomsgpack" -ldflags "-s -w" -o rng
 
 FROM gcr.io/distroless/base-debian11 AS rng
