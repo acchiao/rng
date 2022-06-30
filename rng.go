@@ -2,6 +2,10 @@ package main
 
 import (
 	"context"
+	gintrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/gin-gonic/gin"
+	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+	"gopkg.in/DataDog/dd-trace-go.v1/profiler"
+
 	"log"
 	"net/http"
 	"os/signal"
@@ -16,10 +20,13 @@ func setupRouter() *gin.Engine {
 	router := gin.New()
 
 	router.Use(
+		gintrace.Middleware("rng"),
 		cors.Default(),
 		gin.LoggerWithConfig(gin.LoggerConfig{SkipPaths: []string{"/healthz"}}),
 		gin.Recovery(),
 	)
+
+	router.Use(gin.Recovery())
 
 	v0 := router.Group("/")
 	{
@@ -58,6 +65,27 @@ func getHealthz(c *gin.Context) {
 }
 
 func main() {
+	tracer.Start()
+	defer tracer.Stop()
+
+	err := profiler.Start(
+		profiler.WithService("rng"),
+		profiler.WithEnv("production"),
+		profiler.WithVersion("0.1.0"),
+		profiler.WithProfileTypes(
+			profiler.CPUProfile,
+			profiler.HeapProfile,
+			profiler.BlockProfile,
+			profiler.MutexProfile,
+			profiler.GoroutineProfile),
+	)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	defer profiler.Stop()
+
 	ctx, stop := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
 	defer stop()
 
@@ -83,6 +111,7 @@ func main() {
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
+
 	if err := srv.Shutdown(ctx); err != nil {
 		log.Fatal("Force shutdown initiated: ", err)
 	}

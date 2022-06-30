@@ -5,7 +5,10 @@ metadata:
   name: rng
   namespace: rng
   labels:
-    app.kubernetes.io/name: rng
+    app.kubernetes.io/name: "rng"
+    tags.datadoghq.com/env: "production"
+    tags.datadoghq.com/service: "rng"
+    tags.datadoghq.com/version: "0.1.0"
 spec:
   replicas: 1
   selector:
@@ -19,34 +22,52 @@ spec:
   template:
     metadata:
       labels:
-        app: rng
+        app: "rng"
+        tags.datadoghq.com/env: "production"
+        tags.datadoghq.com/service: "rng"
+        tags.datadoghq.com/version: "0.1.0"
     spec:
       imagePullSecrets:
         - name: dockerhub
       containers:
         - name: rng
-          image: ghcr.io/acchiao/rng:latest
+          image: docker.io/acchiao/rng:latest
           imagePullPolicy: Always
           env:
             - name: GIN_MODE
               value: release
+            - name: DD_AGENT_HOST
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: DD_ENV
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['tags.datadoghq.com/env']
+            - name: DD_SERVICE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['tags.datadoghq.com/service']
+            - name: DD_VERSION
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['tags.datadoghq.com/version']
           ports:
             - name: rng-port
               containerPort: 3000
               protocol: TCP
           readinessProbe:
-            httpGet:
-              path: /healthz
+            tcpSocket:
               port: rng-port
             initialDelaySeconds: 5
             periodSeconds: 5
             failureThreshold: 2
           resources:
             requests:
-              cpu: 50m
-              memory: 50Mi
+              cpu: 5m
+              memory: 10Mi
             limits:
-              cpu: 100m
+              cpu: 15m
               memory: 100Mi
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: FallbackToLogsOnError
