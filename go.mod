@@ -3,9 +3,9 @@ module github.com/acchiao/rng
 go 1.18
 
 require (
-	github.com/gin-contrib/cors v1.3.1
+	github.com/gin-contrib/cors v1.4.0
 	github.com/gin-gonic/gin v1.8.1
-	github.com/stretchr/testify v1.7.2
+	github.com/stretchr/testify v1.8.0
 	gopkg.in/DataDog/dd-trace-go.v1 v1.38.1
 )
 
