@@ -1,0 +1,4 @@
+fileignoreconfig:
+- filename: .pre-commit-config.yaml
+  checksum: 730ec8ec68a4df070ca8133ae32da5c0a9af1ea8691c27a526be526e464e7340
+version: ""

@@ -1,0 +1,19 @@
+---
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: 3298ddab3c13dd77d6ce1fc0baf97691430d84b0  # frozen: v4.3.0
+    hooks:
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: check-yaml
+
+  - repo: https://github.com/golangci/golangci-lint
+    rev: a3336890904cd3efa4f1c7e3f82ce207fe125a6f  # frozen: v1.46.2
+    hooks:
+      - id: golangci-lint
+
+  - repo: https://github.com/thoughtworks/talisman
+    rev: 3bc14bd6c8a2fe1f695d4aa773b050acb7b2c257  # frozen: v1.28.0
+    hooks:
+      - id: talisman-commit
+      - id: talisman-push

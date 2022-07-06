@@ -15,6 +15,12 @@ import (
 	"gopkg.in/DataDog/dd-trace-go.v1/profiler"
 )
 
+func exitOnError(err error, msg string) {
+	if err != nil {
+		log.Fatalf("%s: %s", msg, err)
+	}
+}
+
 func setupRouter() *gin.Engine {
 	router := gin.New()
 
@@ -76,11 +82,11 @@ func main() {
 			profiler.HeapProfile,
 			profiler.BlockProfile,
 			profiler.MutexProfile,
-			profiler.GoroutineProfile),
+			profiler.GoroutineProfile,
+		),
 	)
-
 	if err != nil {
-		log.Fatal(err)
+		exitOnError(err, "Could not start Datadog profiler")
 	}
 
 	defer profiler.Stop()
@@ -99,7 +105,7 @@ func main() {
 
 	go func() {
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-			log.Fatalf("listen: %s\n", err)
+			exitOnError(err, "ListenAndServe failed")
 		}
 	}()
 
@@ -112,7 +118,7 @@ func main() {
 	defer cancel()
 
 	if err := srv.Shutdown(ctx); err != nil {
-		log.Fatal("Force shutdown initiated: ", err)
+		exitOnError(err, "Force shutdown initiated")
 	}
 
 	log.Println("Server exiting")

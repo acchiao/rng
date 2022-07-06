@@ -2,24 +2,41 @@
 run:
   timeout: 5m
 linters:
+  disable-all: true
   enable:
-    - asciicheck
+    - deadcode
     - depguard
     - dogsled
-    - durationcheck
+    - dupl
     - errcheck
-    - errorlint
     - exportloopref
+    - funlen
     - gci
+    - goconst
+    - gocritic
+    - gocyclo
     - gofmt
+    - gofumpt
     - goimports
-    - gosec
+    - goprintffuncname
+    - gosimple
+    - govet
+    - ineffassign
+    - lll
     - misspell
-    - nakedret
-    - nilerr
     - nolintlint
     - revive
-    - wastedassign
+    - rowserrcheck
+    - staticcheck
+    - structcheck
+    - stylecheck
+    - typecheck
+    - unconvert
+    - unparam
+    - unused
+    - varcheck
+    - whitespace
+  fast: false
 issues:
   exclude-rules:
     - linters:
