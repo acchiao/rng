@@ -30,6 +30,10 @@ jobs:
         with:
           images: |
             ghcr.io/${{ github.actor }}/${{ env.PROJECT }}
+          flavor: |
+            latest=true
+            prefix=
+            suffix=
           tags: |
             type=ref,event=branch
             type=ref,event=tag
