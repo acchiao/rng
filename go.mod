@@ -6,7 +6,7 @@ require (
 	github.com/gin-contrib/cors v1.4.0
 	github.com/gin-gonic/gin v1.8.1
 	github.com/stretchr/testify v1.8.0
-	gopkg.in/DataDog/dd-trace-go.v1 v1.39.1
+	gopkg.in/DataDog/dd-trace-go.v1 v1.40.0
 )
 
 require (
