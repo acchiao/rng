@@ -47,7 +47,7 @@ jobs:
             type=semver,pattern=v{{major}}.{{minor}}.{{patch}}
             type=sha,prefix=,suffix=,format=long
             type=sha,prefix=,suffix=,format=short
-      - uses: docker/build-push-action@v3
+      - uses: docker/build-push-action@v4
         id: build
         with:
           context: .
