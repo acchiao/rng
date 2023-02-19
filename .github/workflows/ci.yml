@@ -100,3 +100,12 @@ jobs:
         continue-on-error: true
         with:
           image-name: ghcr.io/${{ github.actor }}/${{ env.PROJECT }}
+      - uses: aquasecurity/trivy-action@master
+        continue-on-error: true
+        with:
+          image-ref: 'ghcr.io/${{ github.actor }}/${{ env.PROJECT }}:${{ github.sha }}'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
