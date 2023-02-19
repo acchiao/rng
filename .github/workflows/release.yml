@@ -22,7 +22,7 @@ jobs:
       - uses: docker/login-action@v2
         with:
           registry: ghcr.io
-          username: ${{ github.actor }}
+          username: ${{ env.GITHUB_REPOSITORY_OWNER }}
           password: ${{ secrets.GITHUB_TOKEN }}
           logout: true
       - uses: docker/metadata-action@v4
@@ -55,6 +55,6 @@ jobs:
           file: Dockerfile
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=registry,ref=ghcr.io/${{ github.actor }}/${{ env.PROJECT }}:buildcache
-          cache-to: type=registry,ref=ghcr.io/${{ github.actor }}/${{ env.PROJECT }}:buildcache,mode=max
+          cache-from: type=registry,ref=ghcr.io/${{ env.GITHUB_REPOSITORY_OWNER }}/${{ env.PROJECT }}:buildcache
+          cache-to: type=registry,ref=ghcr.io/${{ env.GITHUB_REPOSITORY_OWNER }}/${{ env.PROJECT }}:buildcache,mode=max
       - run: echo ${{ steps.build.outputs.digest }}
