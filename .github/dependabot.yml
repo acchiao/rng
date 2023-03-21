@@ -1,18 +1,47 @@
----
 version: 2
+
 updates:
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: github-actions
+    directory: /
     schedule:
-      interval: "daily"
-    open-pull-requests-limit: 10
-  - package-ecosystem: "docker"
-    directory: "/"
+      timezone: America/Los_Angeles
+      interval: daily
+      time: "09:00"
+    labels:
+      - dependencies
+      - github-actions
+    commit-message:
+      prefix: ci
+      include: scope
+    assignees:
+      - acchiao
+
+  - package-ecosystem: docker
+    directory: /
     schedule:
-      interval: "daily"
-    open-pull-requests-limit: 10
-  - package-ecosystem: "gomod"
-    directory: "/"
+      timezone: America/Los_Angeles
+      interval: daily
+      time: "09:00"
+    labels:
+      - dependencies
+      - docker
+    commit-message:
+      prefix: ci
+      include: scope
+    assignees:
+      - acchiao
+
+  - package-ecosystem: gomod
+    directory: /
     schedule:
-      interval: "daily"
-    open-pull-requests-limit: 10
+      timezone: America/Los_Angeles
+      interval: daily
+      time: "09:00"
+    labels:
+      - dependencies
+      - go
+    commit-message:
+      prefix: ci
+      include: scope
+    assignees:
+      - acchiao
