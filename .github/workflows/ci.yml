@@ -97,7 +97,7 @@ jobs:
           cache-from: type=registry,ref=ghcr.io/${{ github.actor }}/${{ env.PROJECT }}:buildcache
           cache-to: type=registry,ref=ghcr.io/${{ github.actor }}/${{ env.PROJECT }}:buildcache,mode=max
       - run: echo ${{ steps.build.outputs.digest }}
-      - uses: aquasecurity/trivy-action@0.9.2
+      - uses: aquasecurity/trivy-action@0.17.0
         continue-on-error: true
         with:
           image-ref: 'ghcr.io/${{ github.actor }}/${{ env.PROJECT }}:${{ github.sha }}'
