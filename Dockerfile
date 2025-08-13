@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM golang:1.20.2-bullseye AS build
+FROM golang:1.25rc3-bullseye AS build
 
 ENV RNG_HOME=/opt/rng \
       CGO_ENABLED=0 \
