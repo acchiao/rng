@@ -7,9 +7,6 @@ updates:
       timezone: America/Los_Angeles
       interval: daily
       time: "09:00"
-    labels:
-      - dependencies
-      - github-actions
     commit-message:
       prefix: ci
       include: scope
@@ -23,9 +20,6 @@ updates:
       timezone: America/Los_Angeles
       interval: daily
       time: "09:00"
-    labels:
-      - dependencies
-      - docker
     commit-message:
       prefix: ci
       include: scope
@@ -39,9 +33,6 @@ updates:
       timezone: America/Los_Angeles
       interval: daily
       time: "09:00"
-    labels:
-      - dependencies
-      - go
     commit-message:
       prefix: ci
       include: scope
