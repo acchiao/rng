@@ -8,11 +8,9 @@ updates:
       interval: daily
       time: "09:00"
     commit-message:
-      prefix: ci
+      prefix: build
       include: scope
     open-pull-requests-limit: 10
-    assignees:
-      - acchiao
 
   - package-ecosystem: docker
     directory: /
@@ -21,11 +19,9 @@ updates:
       interval: daily
       time: "09:00"
     commit-message:
-      prefix: ci
+      prefix: build
       include: scope
     open-pull-requests-limit: 10
-    assignees:
-      - acchiao
 
   - package-ecosystem: gomod
     directory: /
@@ -34,8 +30,6 @@ updates:
       interval: daily
       time: "09:00"
     commit-message:
-      prefix: ci
+      prefix: build
       include: scope
     open-pull-requests-limit: 10
-    assignees:
-      - acchiao
