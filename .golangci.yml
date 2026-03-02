@@ -1,25 +1,16 @@
----
-run:
-  timeout: 5m
+version: "2"
 linters:
-  disable-all: true
+  default: none
   enable:
-    - deadcode
     - depguard
     - dogsled
     - dupl
     - errcheck
-    - exportloopref
     - funlen
-    - gci
     - goconst
     - gocritic
     - gocyclo
-    - gofmt
-    - gofumpt
-    - goimports
     - goprintffuncname
-    - gosimple
     - govet
     - ineffassign
     - lll
@@ -28,30 +19,47 @@ linters:
     - revive
     - rowserrcheck
     - staticcheck
-    - structcheck
-    - stylecheck
-    - typecheck
     - unconvert
     - unparam
     - unused
-    - varcheck
     - whitespace
-  fast: false
-issues:
-  exclude-rules:
-    - linters:
-        - structcheck
-        - unused
-      text: "`data` is unused"
-    - linters:
-        - staticcheck
-      text: "SA1019:"
-    - linters:
-        - revive
-      text: "var-naming:"
-    - linters:
-        - revive
-      text: "exported:"
-    - path: _test\.go
-      linters:
-        - gosec
+  exclusions:
+    generated: lax
+    presets:
+      - comments
+      - common-false-positives
+      - legacy
+      - std-error-handling
+    rules:
+      - linters:
+          - structcheck
+          - unused
+        text: '`data` is unused'
+      - linters:
+          - staticcheck
+        text: 'SA1019:'
+      - linters:
+          - revive
+        text: 'var-naming:'
+      - linters:
+          - revive
+        text: 'exported:'
+      - linters:
+          - gosec
+        path: _test\.go
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
+formatters:
+  enable:
+    - gci
+    - gofmt
+    - gofumpt
+    - goimports
+  exclusions:
+    generated: lax
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
