@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM golang:1.20.2-bullseye AS build
+FROM golang:1.26-bookworm AS build
 
 ENV RNG_HOME=/opt/rng \
       CGO_ENABLED=0 \
@@ -15,7 +15,7 @@ RUN go mod download
 COPY main.go ${RNG_HOME}/
 RUN go build -trimpath -tags "netgo" -ldflags "-s -w" -o ${RNG_HOME}/bin/rng main.go
 
-FROM gcr.io/distroless/base-debian11 AS rng
+FROM gcr.io/distroless/base-debian12 AS rng
 
 ENV RNG_HOME=/opt/rng \
       CGO_ENABLED=0 \
