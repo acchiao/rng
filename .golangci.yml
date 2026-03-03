@@ -23,6 +23,19 @@ linters:
     - unparam
     - unused
     - whitespace
+  settings:
+    depguard:
+      rules:
+        main:
+          files:
+            - "$all"
+          allow:
+            - $gostd
+            - github.com/acchiao/rng
+            - github.com/gin-gonic/gin
+            - github.com/gin-contrib/cors
+            - github.com/stretchr/testify
+            - gopkg.in/DataDog/dd-trace-go.v1
   exclusions:
     generated: lax
     presets:
