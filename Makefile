@@ -3,7 +3,7 @@ BINARY_NAME=rng
 all: clean build lint test push
 
 build:
-	GOARCH=amd64 GOOS=darwin go build -race -trimpath -tags "netgo nomsgpack" -ldflags "-s -w" -o ./bin/${BINARY_NAME}-darwin main.go
+	GOARCH=amd64 GOOS=darwin go build -race -trimpath -tags "netgo" -ldflags "-s -w" -o ./bin/${BINARY_NAME}-darwin main.go
 	docker buildx build --file Dockerfile --tag acchiao/rng:dev --load .
 .PHONY: build
 
